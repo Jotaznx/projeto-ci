@@ -1,0 +1,23 @@
+name: CI Pipeline
+
+on: [push, pull_request]  # Executa em cada push ou PR
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Máquina virtual onde o pipeline roda
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+
+      - name: Rodar testes
+        run: pytest
